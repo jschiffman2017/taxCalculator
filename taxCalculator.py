@@ -1,6 +1,12 @@
+#Jack Schiffman
+#5/3/16
+
 def oneTaxPlan(income):
-	income = int(income)
-	adjustedIncome = income - 9500
+	#if income is less then 9500, deductions make the adjustedIncome 0
+	if income < 9500:
+		adjustedIncome = 0
+	else:
+		adjustedIncome = income - 9500
 	if adjustedIncome <= 2650:
 		tax = 0
 		return tax
@@ -23,8 +29,11 @@ def oneTaxPlan(income):
 
 
 def twoTaxPlan(income):
-	income = int(income)
-	adjustedIncome = income - 9500
+	#if income is less then 9500, deductions make the adjustedIncome 0
+	if income < 9500:
+		adjustedIncome = 0
+	else:
+		adjustedIncome = income - 9500
 	if adjustedIncome <= 8025:
 		tax = adjustedIncome * .1
 		return tax
@@ -47,8 +56,11 @@ def twoTaxPlan(income):
 
 
 def threeTaxPlan(income):
-	income = int(income)
-	adjustedIncome = income - 9500
+	#if income is less then 9500, deductions make the adjustedIncome 0
+	if income < 9500:
+		adjustedIncome = 0
+	else:
+		adjustedIncome = income - 9500
 	if adjustedIncome <= 8700:
 		tax = adjustedIncome * .1
 		return tax
@@ -73,36 +85,47 @@ def threeTaxPlan(income):
 #---------- MAIN PROGRAM ----------
 
 print("Welcome to the tax calculator.")
-income = input("How much gross income did you earn last year? ")
-income = int(income)
-one = int(oneTaxPlan(income))
-two = int(twoTaxPlan(income))
-three = int(threeTaxPlan(income))
-print("")
 
-print("Results for the 2000 plan:")
-print("Taxes owed: ${}".format(one))
-print("Percent of gross: {}%".format((one / income) * 100))
-print("Net income: ${}".format(income - one))
-print("")
+#if user doesn't enter an integer, try again
+error = True
+while error == True:
+	income = input("How much gross income did you earn last year? ")
 
-print("Results for the 2008 plan:")
-print("Taxes owed: ${}".format(two))
-print("Percent of gross: {}%".format((two / income) * 100))
-print("Net income: ${}".format(income - two))
-print("")
+	try: 
+		income = int(income)
+	except ValueError:
+			print("Sorry, that's not a number.")
+			error = True
 
+	else:
+		one = int(oneTaxPlan(income))
+		two = int(twoTaxPlan(income))
+		three = int(threeTaxPlan(income))
+		print("")
+		
+		print("Results for the 2000 plan:")
+		print("Taxes owed: ${}".format(one))
+		print("Percent of gross: {}%".format((one / income) * 100))
+		print("Net income: ${}".format(income - one))
+		print("")
 
-print("Results for the 2014 plan:")
-print("Taxes owed: ${}".format(three))
-print("Percent of gross: {}%".format((three / income) * 100))
-print("Net income: ${}".format(income - three))
-print("")
+		print("Results for the 2008 plan:")
+		print("Taxes owed: ${}".format(two))
+		print("Percent of gross: {}%".format((two / income) * 100))
+		print("Net income: ${}".format(income - two))
+		print("")
 
+		print("Results for the 2014 plan:")
+		print("Taxes owed: ${}".format(three))
+		print("Percent of gross: {}%".format((three / income) * 100))
+		print("Net income: ${}".format(income - three))
+		print("")
 
-if one < two and one < three:
-	print("You save the most money in the 2000 tax plan.")
-elif two < one and two < three:
-	print("You save the most money in the 2008 tax plan.")
-elif three < one and three < two:
-	print("You save the most money in the 2014 tax plan.")
+		if one < two and one < three:
+			print("You save the most money in the 2000 tax plan.")
+		elif two < one and two < three:
+			print("You save the most money in the 2008 tax plan.")
+		elif three < one and three < two:
+			print("You save the most money in the 2014 tax plan.")
+			
+		error = False
